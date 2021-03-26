@@ -22,15 +22,31 @@ def messages(tokenId):
             log('Se encontraron dos puntos\n')
             if url[:url.index(':')].lower() == 'video':
                 log('Es un video\n')        
-                url = url[url.index(':') + 1:].strip()
-                log(f'La url es {url}')
+                url = url[url.index(':') + 1:].strip()                
+                log(f'La url es {url}\n')                
+                thread = threading.Thread(target = wavyVideoJson, args = (request.json, url))
+                thread.start()
 
             elif url[:url.index(':')].lower() == 'image':
-                log('Es una imagen')        
+                log('Es una imagen\n')        
                 url = url[url.index(':') + 1:].strip()
-                thread = threading.Thread(target = wavyTextJson, args = (request.json, url,))
+                log(f'La url es {url}\n')                
+                thread = threading.Thread(target = wavyImageJson, args = (request.json, url))
                 thread.start()
-                log(f'La url es {url}')
+
+            elif url[:url.index(':')].lower() == 'pdf':
+                log('Es un pdf\n')        
+                url = url[url.index(':') + 1:].strip()
+                log(f'La url es {url}\n')                
+                thread = threading.Thread(target = wavyPDFJson, args = (request.json, url))
+                thread.start()
+
+            elif url[:url.index(':')].lower() == 'mp3':
+                log('Es un audio MP3\n')        
+                url = url[url.index(':') + 1:].strip()
+                log(f'La url es {url}\n')                
+                thread = threading.Thread(target = wavyMP3Json, args = (request.json, url))
+                thread.start()
 
             else:
                 log('Es un mensaje1')

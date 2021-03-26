@@ -49,3 +49,63 @@ def wavyImageJson(data, url):
     log(f'Json a enviar: {cjson}\n')    
     wavySendMessage(cjson)
 
+def wavyVideoJson(data, url):
+    log('***Preparando JSON para wavy***\n')
+    number = data['externalId']
+    correlationId = data['messageId']
+    
+    cjson =  {
+            "destinations": [{
+                "correlationId": f"{correlationId}",
+                "destination": f"{number}"
+            }],
+            "message": {
+                "audio": {
+                    "type": "MP4",
+                    "url": f"{url}"
+                }
+            }
+        }
+    log(f'Json a enviar: {cjson}\n')    
+    wavySendMessage(cjson)
+
+
+def wavyPDFJson(data, url):
+    log('***Preparando JSON para wavy***\n')
+    number = data['externalId']
+    correlationId = data['messageId']    
+    cjson =  {
+            "destinations": [{
+                "correlationId": f"{correlationId}",
+                "destination": f"{number}"
+            }],
+            "message": {
+                "document": {
+                    "type": "PDF",
+                    "url": f"{url}",
+                    "caption": "PDF"
+                }
+            }
+        }
+    log(f'Json a enviar: {cjson}\n')    
+    wavySendMessage(cjson)
+
+def wavyMP3Json(data, url):
+    log('***Preparando JSON para wavy***\n')
+    number = data['externalId']
+    correlationId = data['messageId']    
+    cjson =  {
+            "destinations": [{
+                "correlationId": f"{correlationId}",
+                "destination": f"{number}"
+            }],
+            "message": {
+                "audio": {
+                    "type": "MP3",
+                    "url": f"{url}"
+                }
+            }
+        }
+    log(f'Json a enviar: {cjson}\n')    
+    wavySendMessage(cjson)
+
